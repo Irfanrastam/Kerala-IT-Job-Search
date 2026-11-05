@@ -1,0 +1,9 @@
+[
+  {"name":"Infopark - All campuses","type":"infopark","url":"https://infopark.in/companies-job","location":"Infopark (campus to verify)"},
+  {"name":"Infopark - Kochi Phase 1","type":"infopark","url":"https://infopark.in/companies-job/infopark-kochi-phase-1","location":"Infopark Phase 1, Kochi"},
+  {"name":"Infopark - Kochi Phase 2","type":"infopark","url":"https://infopark.in/companies-job/infopark-kochi-phase-2","location":"Infopark Phase 2, Kochi"},
+  {"name":"Technopark - Careers","type":"technopark","url":"https://technopark.in/job-search?lang=e","location":"Technopark, Thiruvananthapuram"},
+  {"name":"Softnotions - Careers","type":"generic","url":"https://softnotions.com/careers/","company":"Softnotions Technologies","location":"Technopark, Thiruvananthapuram"},
+  {"name":"Beinex - Careers","type":"generic","url":"https://www.beinex.ai/careers","company":"Beinex","location":"Kochi / verify campus"},
+  {"name":"Simelabs - Careers","type":"generic","url":"https://www.simelabs.com/careers/","company":"Simelabs","location":"Kochi / verify campus"}
+]

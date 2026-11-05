@@ -1,0 +1,48 @@
+name: Kerala IT Job Search Alerts
+
+on:
+  # 08:00 and 18:00 India time (UTC is 5 hours 30 minutes behind IST).
+  # Minute 30 avoids GitHub's busiest top-of-hour scheduling window.
+  schedule:
+    - cron: "30 2,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kerala-it-job-search
+  cancel-in-progress: false
+
+jobs:
+  scan-and-alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scan official job boards, import curated LinkedIn rows and send alerts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main
+
+      - name: Save duplicate-tracking database
+        run: |
+          if git status --short | grep -q 'data/jobs.db'; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/jobs.db
+            git commit -m "Update job alert history [skip ci]"
+            git push
+          fi
